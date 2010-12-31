@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>		
+		<meta http-equiv="content-language" content="en" />
+		<meta http-equiv="imagetoolbar" content="no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		
+		<meta name="description" content="MooTools &minus; Sites, libraries &amp; stuff" />
+		<meta name="keywords" content="MooTools, plugins, sites, libraries, snippets, examples, tutorial, article" />
+		<meta name="language" content="en-US" />
+		<meta name="classification" content="public" />
+		<meta name="resource-type" content="document" />
+		<meta name="author" content="Oskar Krawczyk" />
+		<meta name="copyright" content="Oskar Krawczyk" />
+		
+		<style type="text/css" media="screen">
+			body {
+				padding: 0;
+				margin: 0;
+				position: relative;
+				background: url(paper.jpg);
+			}
+			
+			h1 {
+				margin: 0;
+				padding: 10px;
+			}
+			
+			textarea.demoo {
+				margin: 20px 0 0 200px;
+			}
+			
+			p.demoo {
+				margin: 20px 0 20px 300px;
+				width: 500px;
+			}
+			
+			a.demoo {
+				display: block;
+				border: solid 1px red;
+				padding: 20px;
+				margin: 0 0 0 20px;
+				width: 300px;
+			}
+			
+			input, a, p, textarea {
+			}
+			
+			ul.demoo_nav {
+				position: fixed;
+				top: 10px;
+				right: 10px;
+				width: 130px;
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			
+				ul.demoo_nav li {
+					padding: 0;
+					margin: 0 5px 0 0;
+					list-style: none;
+					float: left;
+					
+				}
+				
+				ul.demoo_nav a {
+					display: block;
+					padding: 12px;
+					text-align: center;
+					width: 12px;
+					background: #333;
+					color: #fff;
+					text-transform: uppercase;
+					font-size: 11px;
+					font-family: 'Lucida Grande';
+					text-decoration: none;
+					-moz-border-radius: 6px;
+					font-weight: bold;
+				}
+				
+				ul.demoo_nav a:hover {
+					background: #fff;
+					color: #333;
+				}
+			
+			span.demoo_tip {
+				position: absolute;
+				top: 0;
+				left: 10px;
+				
+				/* whatever style you want */
+				background: rgba(255, 255, 255, 0.8);
+				color: #333;
+				width: 260px;
+				text-align: left;
+				font-size: 11px;
+				padding: 10px;
+				font-family: 'Lucida Grande', sans-serif;
+				border-radius: 5px;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+			}
+			
+			span.demoo_slice {
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background: #000;
+				display: none;
+			}
+			
+			span.demoo_outline {
+				z-index: 10;
+				position: absolute;
+				top: -10px;
+				left: 10px;
+				background: rgba(255, 255, 255, 0.3);
+
+				/* whatever style you want */
+				border: solid 5px #F8344E;
+				margin: -5px 0 0 -5px;
+				box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+				-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+				-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+				border-radius: 5px;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+			}
+		</style>
+		
+		<script type="text/javascript" charset="utf-8" src="mootools-1.2.2-core.js"></script>
+		<script type="text/javascript" charset="utf-8" src="mootools-1.2.2.2-more.js"></script>
+		<script type="text/javascript" charset="utf-8" src="demoo.js"></script>
+
+		<script type="text/javascript" charset="utf-8">
+			//<![CDATA[				
+				window.addEvent('domready', function() {
+					var slides = [
+						{
+							element: 'input.demoo',
+							description: 'Single line input.'
+						},
+						{
+							element: 'a.demoo',
+							description: 'You tend to click this'
+						},
+						{
+							element: 'p.demoo',
+							description: 'You tend to read this or just stare at it.'
+						},
+						{
+							element: 'textarea.demoo',
+							description: 'Multi-line input. You can post your auto-biography here!'
+						}
+					];
+					
+					var slides2 = [
+						{
+							element: 'input.demoo',
+							description: 'Single line input.'
+						},
+						{
+							element: 'a.demoo',
+							description: 'You tend to click this'
+						}
+					];
+					
+					var DMoo = new DeMoo(slides);
+					
+					$$('.demoo_start').addEvent('click', function() {
+						DMoo.start();
+					});
+				});
+		    //]]>
+		</script>
+
+				
+		<title>Demoo.js</title>
+	</head>
+	<body>
+		
+		<form action="" id="hotedit-form" method="get" accept-charset="utf-8">
+			<input type="text" name="some_name" value="" id="some_name" />
+			<input type="text" name="some_name" value="default value" id="some_name" />
+
+			<p><input type="submit" value="Continue &rarr;"></p>
+		</form>
+		
+		<div id="wrapper">
+			<h1>DeMoo.js v0.1</h1>
+			<input class="demoo" type="text" name="some_name" value="" id="some_name">
+			
+			<br /><br /><br />
+			
+			<a class="demoo" href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a>
+			
+			<p class="demoo">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			
+			<textarea class="demoo" id="ta" name="Name" rows="8" cols="40">aaaa</textarea>
+			
+			<ul id="">
+				<li><a class="demoo_start" title="" href="#">start</a></li>
+				<li><a class="demoo_end" title="" href="#">end</a></li>
+			</ul>
+			
+		</div> <!-- /wrapper -->
+	</body>
+</html>
