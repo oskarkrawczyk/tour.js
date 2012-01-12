@@ -2,10 +2,10 @@
 Element.implement({
   getCoordinatesWithOffset: function(offset){
     return {
-      'top': this.getCoordinates().top-offset,
-      'left': this.getCoordinates().left-offset,
-      'width': this.getCoordinates().width+(offset*2),
-      'height': this.getCoordinates().height+(offset*2)
+      'top': this.getCoordinates().top - offset,
+      'left': this.getCoordinates().left - offset,
+      'width': this.getCoordinates().width + (offset * 2),
+      'height': this.getCoordinates().height + (offset * 2)
     };
   },
   
@@ -22,7 +22,7 @@ Element.implement({
 
 Window.implement({
   $log: function(){
-    if(typeof console!=='undefined' && typeof console.log !== 'undefined'){
+    if (typeof console !== 'undefined' && typeof console.log !== 'undefined'){
       console.log(arguments.length <= 1 ? arguments[0] : arguments);
     }
   }
@@ -33,13 +33,13 @@ var Tour = new Class({
   options: {
     offset: 5,
     overlay: true,
-    overlayOpacity: 0.4,
+    overlayOpacity: 0.2,
     tipOpacity: 1,
     tipPosition: function(){},
     tipFollows: false,
     tipDisabled: false,
     keyAccess: {
-      // start: 'space',
+      start: 'start',
       next: 'right',
       previous: 'left',
       end: 'esc'
@@ -71,14 +71,14 @@ var Tour = new Class({
     this.bound = {
       'navigate': this.navigate.bind(this),
       'reposition': this.reposition.bind(this),
-      'end': function(e){
-        this.action.call(this, e, 'end');
+      'end': function(event){
+        this.action.call(this, event, 'end');
       }.bind(this),
-      'next': function(e){
-        this.action.call(this, e, 'next');
+      'next': function(event){
+        this.action.call(this, event, 'next');
       }.bind(this),
-      'previous': function(e){
-        this.action.call(this, e, 'previous');
+      'previous': function(event){
+        this.action.call(this, event, 'previous');
       }.bind(this)
     };
     
@@ -86,12 +86,12 @@ var Tour = new Class({
     this.nav = {};
     
     window.addEvents({
-      keydown: function(e){
-        switch (e.key){
-          case 'start':
+      keydown: function(event){
+        switch (event.key){
+          case this.options.keyAccess.start:
             if (!this.current.demo) this.show();
             break;
-          case 'esc':
+          case this.options.keyAccess.end:
             if (this.current.demo) this.hide();
             break;
         }
@@ -109,19 +109,19 @@ var Tour = new Class({
       this.presentation = presentation;
     }
     window.fireEvent('keydown', {
-      key: 'start'
+      key: this.options.keyAccess.start
     });
   },
   
-  action: function(e, mode) {
-    e.stop();
+  action: function(event, mode){
+    event.stop();
     this[mode]();
   },
   
-  navigation: function() {
+  navigation: function(){
     
     // demoo_nav
-    this.nav.cont = new Element('ul', {
+    this.nav.cont = Element('ul', {
       'class': 'demoo_nav',
       'styles': {
         'opacity': 0
@@ -182,7 +182,7 @@ var Tour = new Class({
     this.current.demo = true;
     
     // create the overlay if needed
-    if(this.options.overlay){
+    if (this.options.overlay){
       var sliceProp = {
         'class': 'demoo_slice',
         'styles': {
@@ -196,7 +196,7 @@ var Tour = new Class({
       };
       
       // create the slices
-      for(var i = 0; i < this.slicesDir.length; i++){
+      for (var i = 0; i < this.slicesDir.length; i++){
         this.slices[this.slicesDir[i]] = Element('span', sliceProp).inject(document.body);
       }
     }
@@ -207,7 +207,7 @@ var Tour = new Class({
     }).inject(this.body);
     
     // create the tip if needed
-    if(!this.options.tipDisabled) {
+    if (!this.options.tipDisabled){
       this.current.tip = Element('span', {
         'class': 'demoo_tip',
         'html': '',
@@ -230,18 +230,18 @@ var Tour = new Class({
   },
   
   navigate: function(event){
-    if (event.code == 37 || event.code == 39){
-      if (this.current.slide <= 0 && event.code == 37){
+    if (event.key === this.options.keyAccess.previous || event.key === this.options.keyAccess.next){
+      if (this.current.slide <= 0 && event.key === this.options.keyAccess.previous){
         this.fireEvent('onFirst', [this.outline, this.collected]);
         return;
       }
       
-      if (this.current.slide >= this.presentation.length - 1 && event.code == 39){
+      if (this.current.slide >= this.presentation.length - 1 && event.key === this.options.keyAccess.next){
         this.fireEvent('onLast', [this.outline, this.collected]);
         return;
       }
       
-      this.expose(event.code);
+      this.expose(event.key);
     }
   },
   
@@ -271,7 +271,7 @@ var Tour = new Class({
   
   expose: function(key){
     if (key){
-      this.current.slide = (key == 37 ? this.current.slide - 1 : this.current.slide + 1);
+      this.current.slide = (key == this.options.keyAccess.previous ? this.current.slide - 1 : this.current.slide + 1);
     }
     
     // get the presented element
@@ -284,12 +284,12 @@ var Tour = new Class({
     this.highlighter(this.current.element);
 
     // destroy the previous tip
-    if(this.current.tip){
+    if (this.current.tip){
       this.current.tip.fade(0);
     }
   },
   
-  tip: function() {
+  tip: function(){
     if (this.current.tip){
       // update and show the tip
       this.current.tip.set('html', this.current.description).fade(this.options.tipOpacity);
