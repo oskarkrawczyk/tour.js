@@ -187,6 +187,11 @@ var Tour = new Class({
         'class': 'demoo_slice',
         'styles': {
           'opacity': this.options.overlayOpacity
+        },
+        'events': {
+          'click': function(){
+            this.hide();
+          }.bind(this)
         }
       };
       
