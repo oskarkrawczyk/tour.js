@@ -29,11 +29,13 @@ Window.implement({
 });
 
 var Tour = new Class({
+  
   Implements: [Options, Events],
+  
   options: {
     offset: 5,
     overlay: true,
-    overlayOpacity: 0.2,
+    overlayOpacity: 0.3,
     tipOpacity: 1,
     tipPosition: function(){},
     tipFollows: false,
@@ -57,6 +59,7 @@ var Tour = new Class({
   
   initialize: function(presentation, options){
     this.setOptions(options);
+    this.active = false;
     this.slicesDir = ['north', 'east', 'west', 'south'];
     this.slices = {};
     this.presentation = presentation || [{}];
@@ -365,4 +368,24 @@ var Tour = new Class({
       });
     }
   }
+});
+
+// Builder
+Tour.Build = new Class({
+  
+  Slides: [],
+  
+  initialize: function(dataParam){
+    document.getElements('*[' + dataParam + ']').each(function(element){
+      var uid = 'tuid-' + Number.random(1000, 9999);
+      element.set('data-tour-uid', uid);
+      var option = {
+        element: '*[data-tour-uid=' + uid + ']',
+        description: element.get(dataParam)
+      };
+      this.Slides.push(option);
+    }, this);
+    new Tour(this.Slides).start();
+  }
+  
 });

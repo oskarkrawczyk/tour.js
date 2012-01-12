@@ -11,50 +11,52 @@
     <script type="text/javascript" charset="utf-8">
       //<![CDATA[
         window.addEvent('domready', function(){
-          var slides = [
-            {
-              element: 'input[data-tour]',
-              description: 'Single line input.'
-            },
-            {
-              element: 'a[data-tour]',
-              description: 'You tend to click this'
-            },
-            {
-              element: 'p[data-tour]',
-              description: 'You tend to read this or just stare at it.'
-            },
-            {
-              element: 'textarea[data-tour]',
-              description: 'Multi-line input. You can post your auto-biography here!'
-            }
-          ];
+          // var slides = [
+          //   {
+          //     element: 'input[data-tour-desc]',
+          //     description: 'Single line input.'
+          //   },
+          //   {
+          //     element: 'a[data-tour-desc]',
+          //     description: 'You tend to click this'
+          //   },
+          //   {
+          //     element: 'p[data-tour-desc]',
+          //     description: 'You tend to read this or just stare at it.'
+          //   },
+          //   {
+          //     element: 'textarea[data-tour-desc]',
+          //     description: 'Multi-line input. You can post your auto-biography here!'
+          //   }
+          // ];
+          // new Tour(slides).start();
           
-          var tour = new Tour(slides);
-          
-          document.body.addEvent('keydown', function(event){
-            if (event.shift && event.key === '/'){
-              tour.start();
+          document.addEvents({
+            keydown: function(event){
+              if (event.shift && event.key === '/'){
+                new Tour.Build('data-tour-desc');
+              }
             }
           });
+          
         });
       //]]>
     </script>
 
-    <title>tour.js</title>
+    <title>Tour.js</title>
   </head>
   <body>
     <div id="wrapper">
-      <h1>tour.js</h1>
+      <h1>Tour.js</h1>
       <p><strong>Hit the "?" key, and navigate with arrows</strong></p>
-      <input type="text" name="some_name" value="" data-tour="Single line input." />
-      <p>
-        <a href="#" data-tour="You tend to click this.">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a>
+      <input type="text" name="some_name" value="" data-tour-desc="Single line input." />
+      <p data-tour-desc="You tend to read this or just stare at it.">
+        <a href="#" data-tour-desc="You tend to click this.">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a>
       </p>
       
-      <p data-tour="You tend to read this or just stare at it.">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p data-tour-desc="You tend to read this or just stare at it.">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       
-      <textarea rows="8" cols="40" data-tour="Multi-line input. You can post your auto-biography here!"></textarea>
+      <textarea rows="8" cols="40" data-tour-desc="Multi-line input. You can post your auto-biography here!"></textarea>
       
     </div> <!-- /wrapper -->
   </body>
