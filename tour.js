@@ -28,7 +28,7 @@ Window.implement({
   }
 });
 
-var Demoly = new Class({
+var Tour = new Class({
   Implements: [Options, Events],
   options: {
     offset: 5,
@@ -44,13 +44,13 @@ var Demoly = new Class({
       previous: 'left',
       end: 'esc'
     },
-    onReposition: function(a,b,c){
+    onReposition: function(outline, overlaySlices){
       $log('Repositioned expose.');
     },
-    onFirst: function(a,b,c){
+    onFirst: function(outline, overlaySlices){
       $log('Already at the first slide.');
     },
-    onLast: function(a,b,c){
+    onLast: function(outline, overlaySlices){
       $log('At the last slide, cannot go any further.');
     }
   },
@@ -245,12 +245,12 @@ var Demoly = new Class({
   navigate: function(event){
     if (event.code == 37 || event.code == 39){
       if (this.current.slide <= 0 && event.code == 37){
-        this.fireEvent('onFirst', [this, this.outline]);
+        this.fireEvent('onFirst', [this.outline, this.collected]);
         return;
       }
       
       if (this.current.slide >= this.presentation.length - 1 && event.code == 39){
-        this.fireEvent('onLast', [this, this.outline]);
+        this.fireEvent('onLast', [this.outline, this.collected]);
         return;
       }
       
@@ -339,7 +339,7 @@ var Demoly = new Class({
     this.fxSlices = new Fx.Elements(this.collected, {
       onComplete: function(){
         this.tip();
-        this.fireEvent('onReposition', [this, this.outline]);
+        this.fireEvent('onReposition', [this.outline, this.collected]);
         
         // @todo: find a way to scroll only when the highlighter is out of the view port
         // $log(!(this.outline.getPosition().y >= window.getSize().y-this.outline.getSize().y));

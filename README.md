@@ -1,7 +1,5 @@
-Demoly.js
+Tour.js
 ===
-
-**This code is quite old and needs some serious refactoring.**
 
 TODO:
 ---

@@ -1,25 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html>
   <head>
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="content-language" content="en" />
-    <meta http-equiv="imagetoolbar" content="no" />
-    <meta http-equiv="X-UA-Compatible" content="IE=8" />
-    
-    <meta name="description" content="MooTools &minus; Sites, libraries &amp; stuff" />
-    <meta name="keywords" content="MooTools, plugins, sites, libraries, snippets, examples, tutorial, article" />
-    <meta name="language" content="en-US" />
-    <meta name="classification" content="public" />
-    <meta name="resource-type" content="document" />
-    <meta name="author" content="Oskar Krawczyk" />
-    <meta name="copyright" content="Oskar Krawczyk" />
-    
     <script type="text/javascript" charset="utf-8" src="mootools.js"></script>
-    <script type="text/javascript" charset="utf-8" src="demoly.js"></script>
-    <link rel="stylesheet" href="demoly.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+    <script type="text/javascript" charset="utf-8" src="tour.js"></script>
+    <link rel="stylesheet" href="tour.css" type="text/css" media="screen" />
     
     <script type="text/javascript" charset="utf-8">
       //<![CDATA[
@@ -43,33 +30,23 @@
             }
           ];
           
-          var slides2 = [
-            {
-              element: 'input.demoo',
-              description: 'Single line input.'
-            },
-            {
-              element: 'a.demoo',
-              description: 'You tend to click this'
-            }
-          ];
-          
-          var dm = new Demoly(slides);
+          var tour = new Tour(slides);
           
           document.body.addEvent('keydown', function(event){
-            if (event.shift && event.key === 't'){
-              dm.start();
+            if (event.shift && event.key === '/'){
+              tour.start();
             }
           });
         });
       //]]>
     </script>
 
-    <title>Demoo.js (shift + t)</title>
+    <title>tour.js</title>
   </head>
   <body>
     <div id="wrapper">
-      <h1>Demoo.js (shift + t)</h1>
+      <h1>tour.js</h1>
+      <p><strong>Hit the "?" key, and navigate with arrows</strong></p>
       <input class="demoo" type="text" name="some_name" value="" id="some_name">
       <p>
         <a class="demoo" href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a>
@@ -78,11 +55,6 @@
       <p class="demoo">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       
       <textarea class="demoo" id="ta" name="Name" rows="8" cols="40"></textarea>
-      
-      <ul>
-        <li><a class="demoo_start" title="" href="#">start</a></li>
-        <li><a class="demoo_end" title="" href="#">end</a></li>
-      </ul>
       
     </div> <!-- /wrapper -->
   </body>
