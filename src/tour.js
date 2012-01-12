@@ -266,7 +266,7 @@ var Tour = new Class({
     window.removeEvent('keydown', this.bound.navigate);
     
     // destroy the navigation
-    this.nav.cont.destroy();
+    // this.nav.cont.destroy();
   },
   
   expose: function(key){
