@@ -10,35 +10,12 @@
     
     <script type="text/javascript" charset="utf-8">
       //<![CDATA[
-        window.addEvent('domready', function(){
-          // var slides = [
-          //   {
-          //     element: 'input[data-tour-desc]',
-          //     description: 'Single line input.'
-          //   },
-          //   {
-          //     element: 'a[data-tour-desc]',
-          //     description: 'You tend to click this'
-          //   },
-          //   {
-          //     element: 'p[data-tour-desc]',
-          //     description: 'You tend to read this or just stare at it.'
-          //   },
-          //   {
-          //     element: 'textarea[data-tour-desc]',
-          //     description: 'Multi-line input. You can post your auto-biography here!'
-          //   }
-          // ];
-          // new Tour(slides).start();
-          
-          document.addEvents({
-            keydown: function(event){
-              if (event.shift && event.key === '/'){
-                new Tour.Build('data-tour-desc');
-              }
+        document.addEvents({
+          keydown: function(event){
+            if (event.shift && event.key === '/'){
+              new Tour.Build('data-tour-desc');
             }
-          });
-          
+          }
         });
       //]]>
     </script>
