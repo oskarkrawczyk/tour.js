@@ -39,7 +39,7 @@ var Tour = new Class({
     tipFollows: false,
     tipDisabled: false,
     keyAccess: {
-      start: 'space',
+      // start: 'space',
       next: 'right',
       previous: 'left',
       end: 'esc'
@@ -87,11 +87,11 @@ var Tour = new Class({
     
     window.addEvents({
       keydown: function(e){
-        switch (e.code){
-          case 32:
+        switch (e.key){
+          case 'start':
             if (!this.current.demo) this.show();
             break;
-          case 27:
+          case 'esc':
             if (this.current.demo) this.hide();
             break;
         }
@@ -104,30 +104,12 @@ var Tour = new Class({
     this.expose();
   },
   
-  next: function(){
-    this.navigate({
-      code: 39
-    });
-  },
-  
-  previous: function(){
-    this.navigate({
-      code: 37
-    });
-  },
-  
-  end: function(){
-    window.fireEvent('keydown', {
-      code: 27
-    });
-  },
-  
   start: function(presentation){
     if(presentation){
       this.presentation = presentation;
     }
     window.fireEvent('keydown', {
-      code: 32
+      key: 'start'
     });
   },
   
@@ -234,7 +216,7 @@ var Tour = new Class({
     window.addEvent('keydown', this.bound.navigate);
     
     // activate the navigation
-    this.navigation();
+    // this.navigation();
   },
   
   show: function(){

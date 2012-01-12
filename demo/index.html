@@ -13,19 +13,19 @@
         window.addEvent('domready', function(){
           var slides = [
             {
-              element: 'input.demoo',
+              element: 'input[data-tour]',
               description: 'Single line input.'
             },
             {
-              element: 'a.demoo',
+              element: 'a[data-tour]',
               description: 'You tend to click this'
             },
             {
-              element: 'p.demoo',
+              element: 'p[data-tour]',
               description: 'You tend to read this or just stare at it.'
             },
             {
-              element: 'textarea.demoo',
+              element: 'textarea[data-tour]',
               description: 'Multi-line input. You can post your auto-biography here!'
             }
           ];
@@ -47,14 +47,14 @@
     <div id="wrapper">
       <h1>tour.js</h1>
       <p><strong>Hit the "?" key, and navigate with arrows</strong></p>
-      <input class="demoo" type="text" name="some_name" value="" id="some_name">
+      <input type="text" name="some_name" value="" data-tour="Single line input." />
       <p>
-        <a class="demoo" href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a>
+        <a href="#" data-tour="You tend to click this.">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a>
       </p>
       
-      <p class="demoo">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p data-tour="You tend to read this or just stare at it.">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       
-      <textarea class="demoo" id="ta" name="Name" rows="8" cols="40"></textarea>
+      <textarea rows="8" cols="40" data-tour="Multi-line input. You can post your auto-biography here!"></textarea>
       
     </div> <!-- /wrapper -->
   </body>
