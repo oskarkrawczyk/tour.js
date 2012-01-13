@@ -3,7 +3,7 @@ body {
 	font-family: Helvetica;
 }
 
-span.demoo_tip {
+.tourjs_tip {
 	position: absolute;
 	top: 0;
 	left: 10px;
@@ -19,7 +19,7 @@ span.demoo_tip {
 	border-radius: 3px;
 }
 
-span.demoo_slice {
+.tourjs_slice {
 	display: block;
 	position: absolute;
 	top: 0;
@@ -27,7 +27,7 @@ span.demoo_slice {
 	background: #000;
 }
 
-span.demoo_outline {
+.tourjs_outline {
 	z-index: 10;
 	position: absolute;
 	top: -10px;

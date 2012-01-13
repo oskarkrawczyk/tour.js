@@ -33,6 +33,7 @@ var Tour = new Class({
   Implements: [Options, Events],
   
   options: {
+    classPrefix: 'tourjs',
     offset: 5,
     overlay: true,
     overlayOpacity: 0.3,
@@ -40,6 +41,10 @@ var Tour = new Class({
     tipPosition: function(){},
     tipFollows: false,
     tipDisabled: false,
+    fx: {
+      duration: 500,
+      transition: 'sine:out'
+    },
     keyAccess: {
       activate: function(){
         return this.shift && this.key === 't';
@@ -131,7 +136,7 @@ var Tour = new Class({
     // create the overlay if needed
     if (this.options.overlay){
       var sliceProp = {
-        'class': 'demoo_slice',
+        'class': this.options.classPrefix + '_slice',
         'styles': {
           'opacity': this.options.overlayOpacity
         },
@@ -150,13 +155,13 @@ var Tour = new Class({
     
     // create the highlighter
     this.outline = Element('span', {
-      'class': 'demoo_outline'
+      'class': this.options.classPrefix + '_outline'
     }).inject(this.body);
     
     // create the tip if needed
     if (!this.options.tipDisabled){
       this.current.tip = Element('span', {
-        'class': 'demoo_tip',
+        'class': this.options.classPrefix + '_tip',
         'html': '',
         'styles': {
           'opacity': 0
@@ -259,7 +264,7 @@ var Tour = new Class({
   highlighter: function(el){
     
     // get the coords with additional offset
-    var elcoords = el.getCoordinatesWithOffset(this.options.offset);
+    var elCoords = el.getCoordinatesWithOffset(this.options.offset);
     
     // collect all slices and the outline
     this.collected = [this.slices.north, this.slices.east, this.slices.west, this.slices.south, this.outline];
@@ -276,34 +281,34 @@ var Tour = new Class({
         // new Fx.Scroll(this.body).toElement($pick(this.current.tip, this.outline));
       
       }.bind(this),
-      duration: 500,
-      transition: 'sine:out'
+      duration: this.options.fx.duration,
+      transition: this.options.fx.transition
     });
     
     if (this.options.overlay){
       // animate
       this.fxSlices.start({
         '0': {
-          'height':   elcoords.top,
-          'width':  window.getSize().x
+          'height': elCoords.top,
+          'width': window.getSize().x
         },
         '1': {
-          'height':   elcoords.height,
-          'width':  elcoords.left,
-          'top':    elcoords.top
+          'height': elCoords.height,
+          'width': elCoords.left,
+          'top': elCoords.top
         },
         '2': {
-          'height':   elcoords.height,
-          'width':  window.getSize().x-(elcoords.left+elcoords.width),
-          'left':   (elcoords.left+elcoords.width),
-          'top':    elcoords.top
+          'height': elCoords.height,
+          'width': window.getSize().x - (elCoords.left + elCoords.width),
+          'left': elCoords.left + elCoords.width,
+          'top': elCoords.top
         },
         '3': {
-          'height':   window.getScrollSize().y-(elcoords.top+elcoords.height),
-          'width':  window.getSize().x,
-          'top':    (elcoords.top+elcoords.height)
+          'height': window.getScrollSize().y - (elCoords.top + elCoords.height),
+          'width': window.getSize().x,
+          'top': elCoords.top + elCoords.height
         },
-        '4': elcoords
+        '4': elCoords
       });
     }
   }
