@@ -125,66 +125,6 @@ var Tour = new Class({
     this[mode]();
   },
   
-  navigation: function(){
-    
-    // demoo_nav
-    this.nav.cont = Element('ul', {
-      'class': 'demoo_nav',
-      'styles': {
-        'opacity': 0
-      }
-    });
-    
-    // demoo_nav demo_nav_close
-    this.nav.close = Element('li', {
-      'class': 'demoo_nav_close'
-    }).inject(this.nav.cont);
-    
-    // demoo_nav demo_nav_close a
-    this.nav.close.anchor = Element('a', {
-      'href': '#close',
-      'text': 'X',
-      'events': {
-        click: this.bound.end
-      }
-    }).inject(this.nav.close);
-    
-    // demoo_nav demo_nav_prev
-    this.nav.prev = Element('li', {
-      'class': 'demoo_nav_prev'
-    }).inject(this.nav.cont);
-    
-    // demoo_nav demo_nav_prev a
-    this.nav.close.anchor = Element('a', {
-      'href': '#previous-slide',
-      'text': '<',
-      'events': {
-        click: this.bound.previous
-      }
-    }).inject(this.nav.prev);
-    
-    // demoo_nav demo_nav_next
-    this.nav.next = Element('li', {
-      'class': 'demoo_nav_next'
-    }).inject(this.nav.cont);
-      
-    // demoo_nav demo_nav_next a
-    this.nav.close.anchor = Element('a', {
-      'href': '#next-slide',
-      'text': '>',
-      'events': {
-        click: this.bound.next
-      }
-    }).inject(this.nav.next);
-      
-    // @todo use wraps/grab or sth... the one that injects multiple els at once
-    this.showNav.delay(1000, this);
-  },
-  
-  showNav: function(){
-    this.nav.cont.inject(document.body).fade('in');
-  },
-  
   create: function(){
     this.current.demo = true;
     
@@ -226,9 +166,6 @@ var Tour = new Class({
     
     // navigate by pressing arrow right and arrow left
     window.addEvent('keydown', this.bound.navigate);
-    
-    // activate the navigation
-    // this.navigation();
   },
   
   show: function(){
@@ -253,7 +190,7 @@ var Tour = new Class({
   },
   
   hide: function(){
-    $log('destroy all');
+
     // destroy the overlay
     for (var i = 0; i < this.slicesDir.length; i++){
       this.slices[this.slicesDir[i]].destroy();
@@ -272,9 +209,6 @@ var Tour = new Class({
     
     // remove events
     window.removeEvent('keydown', this.bound.navigate);
-    
-    // destroy the navigation
-    // this.nav.cont.destroy();
   },
   
   expose: function(key){
