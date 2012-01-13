@@ -41,6 +41,9 @@ var Tour = new Class({
     tipFollows: false,
     tipDisabled: false,
     keyAccess: {
+      activate: function(){
+        return this.shift && this.key === 't';
+      },
       start: 'start',
       next: 'right',
       previous: 'left',
@@ -69,18 +72,18 @@ var Tour = new Class({
     this.current = {
       slide: 0
     };
-    
+
     // create binds
     this.bound = {
-      'navigate': this.navigate.bind(this),
-      'reposition': this.reposition.bind(this),
-      'end': function(event){
+      navigate: this.navigate.bind(this),
+      reposition: this.reposition.bind(this),
+      end: function(event){
         this.action.call(this, event, 'end');
       }.bind(this),
-      'next': function(event){
+      next: function(event){
         this.action.call(this, event, 'next');
       }.bind(this),
-      'previous': function(event){
+      previous: function(event){
         this.action.call(this, event, 'previous');
       }.bind(this)
     };
@@ -90,13 +93,14 @@ var Tour = new Class({
     
     window.addEvents({
       keydown: function(event){
-        switch (event.key){
-          case this.options.keyAccess.start:
-            if (!this.current.demo) this.show();
-            break;
-          case this.options.keyAccess.end:
-            if (this.current.demo) this.hide();
-            break;
+        if (this.options.keyAccess.activate.call(event)){
+          this.start();
+        }
+        if (event.key === this.options.keyAccess.start && !this.current.demo){
+          this.show();
+        }
+        if (event.key === this.options.keyAccess.end && this.current.demo){
+          this.hide();
         }
       }.bind(this),
       resize: this.bound.reposition
@@ -108,7 +112,7 @@ var Tour = new Class({
   },
   
   start: function(presentation){
-    if(presentation){
+    if (presentation){
       this.presentation = presentation;
     }
     window.fireEvent('keydown', {
@@ -249,6 +253,7 @@ var Tour = new Class({
   },
   
   hide: function(){
+    $log('destroy all');
     // destroy the overlay
     for (var i = 0; i < this.slicesDir.length; i++){
       this.slices[this.slicesDir[i]].destroy();
@@ -375,7 +380,7 @@ Tour.Build = new Class({
   
   Slides: [],
   
-  initialize: function(dataParam){
+  initialize: function(dataParam, options){
     document.getElements('*[' + dataParam + ']').each(function(element){
       var uid = 'tuid-' + Number.random(1000, 9999);
       element.set('data-tour-uid', uid);
@@ -385,7 +390,7 @@ Tour.Build = new Class({
       };
       this.Slides.push(option);
     }, this);
-    new Tour(this.Slides).start();
+    new Tour(this.Slides, options);
   }
   
 });

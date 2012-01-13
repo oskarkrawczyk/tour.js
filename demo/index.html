@@ -11,10 +11,14 @@
     <script type="text/javascript" charset="utf-8">
       //<![CDATA[
         document.addEvents({
-          keydown: function(event){
-            if (event.shift && event.key === '/'){
-              new Tour.Build('data-tour-desc');
-            }
+          domready: function(event){
+            new Tour.Build('data-tour-desc', {
+              keyAccess: {
+                activate: function(){
+                  return this.shift && this.key === '/';
+                }
+              }
+            });
           }
         });
       //]]>
