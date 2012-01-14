@@ -12,13 +12,7 @@
       //<![CDATA[
         document.addEvents({
           domready: function(event){
-            new Tour.Build('data-tour-desc', {
-              keyAccess: {
-                activate: function(){
-                  return this.shift && this.key === '/';
-                }
-              }
-            });
+            new Tour.Build('data-tour-desc');
           }
         });
       //]]>

@@ -47,7 +47,7 @@ var Tour = new Class({
     },
     keyAccess: {
       activate: function(){
-        return this.shift && this.key === 't';
+        return this.shift && this.key === '/';
       },
       start: 'start',
       next: 'right',
