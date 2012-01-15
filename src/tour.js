@@ -30,7 +30,7 @@ var Tour = new Class({
     tip: {
       opacity: 1,
       position: {},
-      follow: true
+      follow: false
     },
     fx: {
       duration: 500,
