@@ -1,4 +1,3 @@
-// add offset to the fetched coords
 Element.implement({
   getCoordinatesWithOffset: function(offset){
     return {
@@ -15,14 +14,6 @@ Element.implement({
         this.dispose();
       }.bind(this)
     }).start('opacity', 0);
-  }
-});
-
-Window.implement({
-  $log: function(){
-    if (typeof console !== 'undefined' && typeof console.log !== 'undefined'){
-      console.log(arguments.length <= 1 ? arguments[0] : arguments);
-    }
   }
 });
 
@@ -53,16 +44,10 @@ var Tour = new Class({
       next: 'right',
       previous: 'left',
       end: 'esc'
-    },
-    onReposition: function(outline, overlaySlices){
-      $log('Repositioned expose.');
-    },
-    onFirst: function(outline, overlaySlices){
-      $log('Already at the first slide.');
-    },
-    onLast: function(outline, overlaySlices){
-      $log('At the last slide, cannot go any further.');
     }
+    // onReposition: function(outline, overlaySlices){},
+    // onFirst: function(outline, overlaySlices){},
+    // onLast: function(outline, overlaySlices){}
   },
   
   initialize: function(presentation, options){
