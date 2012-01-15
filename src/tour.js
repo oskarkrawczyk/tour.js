@@ -9,14 +9,12 @@ Element.implement({
     };
   },
   
-  destroy: function(){
-    // fade it out ...
-    this.fade('out');
-    
-    // ... and dispose of the element
-    (function(){
-      this.dispose();
-    }).delay(300, this);
+  fadestroy: function(){
+    new Fx.Tween(this, {
+      onComplete: function(){
+        this.dispose();
+      }.bind(this)
+    }).start('opacity', 0);
   }
 });
 
@@ -149,7 +147,7 @@ var Tour = new Class({
       
       // create the slices
       for (var i = 0; i < this.slicesDir.length; i++){
-        this.slices[this.slicesDir[i]] = Element('span', sliceProp).inject(document.body);
+        this.slices[this.slicesDir[i]] = Element('span', sliceProp).inject(this.body);
       }
     }
     
@@ -166,7 +164,7 @@ var Tour = new Class({
         'styles': {
           'opacity': 0
         }
-      }).inject(this.options.tipFollows ? this.outline : document.body); // either follow the highlight or stay in one position
+      }).inject(this.options.tipFollows ? this.outline : this.body); // either follow the highlight or stay in one position
     }
     
     // navigate by pressing arrow right and arrow left
@@ -198,14 +196,14 @@ var Tour = new Class({
 
     // destroy the overlay
     for (var i = 0; i < this.slicesDir.length; i++){
-      this.slices[this.slicesDir[i]].destroy();
+      this.slices[this.slicesDir[i]].fadestroy();
     }
     
     // destroy the outline
-    this.outline.destroy();
+    this.outline.fadestroy();
     
     // destroy the tip
-    this.current.tip.destroy();
+    this.current.tip.fadestroy();
     
     // go back to the fist slide
     this.current.slide = 0;
