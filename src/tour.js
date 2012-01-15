@@ -171,8 +171,14 @@ var Tour = new Class({
   },
   
   addFx: function(){
-    this.collected = [this.slices.north, this.slices.east, this.slices.west, this.slices.south, this.outline];
-    this.fx.slices = new Fx.Elements(this.collected, {
+    if (this.options.overlay){
+      this.collected = [this.slices.north, this.slices.east, this.slices.west, this.slices.south];
+      this.fx.slices = new Fx.Elements(this.collected, {
+        duration: this.options.fx.duration,
+        transition: this.options.fx.transition
+      });
+    }
+    this.fx.outline = new Fx.Morph(this.outline, {
       onComplete: function(){
         this.tip();
         this.fireEvent('onReposition', [this.outline, this.collected]);
@@ -185,6 +191,7 @@ var Tour = new Class({
       duration: this.options.fx.duration,
       transition: this.options.fx.transition
     });
+    
   },
   
   navigate: function(event){
@@ -272,10 +279,10 @@ var Tour = new Class({
           'height': window.getScrollSize().y - (elCoords.top + elCoords.height),
           'width': window.getSize().x,
           'top': elCoords.top + elCoords.height
-        },
-        '4': elCoords
+        }
       });
     }
+    this.fx.outline.start(elCoords);
   }
 });
 
