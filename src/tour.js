@@ -30,7 +30,7 @@ var Tour = new Class({
     tip: {
       opacity: 1,
       position: {},
-      follows: false
+      follow: true
     },
     fx: {
       duration: 500,
@@ -163,7 +163,7 @@ var Tour = new Class({
         'styles': {
           'opacity': 0
         }
-      }).inject(this.options.tip.follows ? this.outline : this.body);
+      }).inject(this.options.tip.follow ? this.outline : this.body);
       this.fx.tip = new Fx.Tween(this.current.tip, {
         link: 'cancel'
       });
