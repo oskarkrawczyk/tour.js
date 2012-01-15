@@ -33,12 +33,14 @@ var Tour = new Class({
   options: {
     classPrefix: 'tourjs',
     offset: 5,
-    overlay: true,
-    overlayOpacity: 0.3,
-    tipOpacity: 1,
-    tipPosition: function(){},
-    tipFollows: false,
-    tipDisabled: false,
+    overlay: {
+      opacity: 0.3
+    },
+    tip: {
+      opacity: 1,
+      position: {},
+      follows: false
+    },
     fx: {
       duration: 500,
       transition: 'sine:out'
@@ -136,7 +138,7 @@ var Tour = new Class({
       var sliceProp = {
         'class': this.options.classPrefix + '_slice',
         'styles': {
-          'opacity': this.options.overlayOpacity
+          'opacity': this.options.overlay.opacity
         },
         'events': {
           'click': function(){
@@ -157,14 +159,14 @@ var Tour = new Class({
     }).inject(this.body);
     
     // create the tip if needed
-    if (!this.options.tipDisabled){
+    if (this.options.tip){
       this.current.tip = Element('span', {
         'class': this.options.classPrefix + '_tip',
         'html': '',
         'styles': {
           'opacity': 0
         }
-      }).inject(this.options.tipFollows ? this.outline : this.body); // either follow the highlight or stay in one position
+      }).inject(this.options.tip.follows ? this.outline : this.body); // either follow the highlight or stay in one position
     }
     
     // navigate by pressing arrow right and arrow left
@@ -237,7 +239,7 @@ var Tour = new Class({
   tip: function(){
     if (this.current.tip){
       // update and show the tip
-      this.current.tip.set('html', this.current.description).fade(this.options.tipOpacity);
+      this.current.tip.set('html', this.current.description).fade(this.options.tip.opacity);
 
       // reposition the tip
       this.current.tip.position(Object.merge({
@@ -255,7 +257,7 @@ var Tour = new Class({
           x: 0,
           y: 15
         }
-      }, this.options.tipPosition));
+      }, this.options.tip.position));
     }
   },
   
