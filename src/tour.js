@@ -30,7 +30,8 @@ var Tour = new Class({
     tip: {
       opacity: 1,
       position: {},
-      follow: false
+      follow: false,
+      duration: 300
     },
     fx: {
       duration: 500,
@@ -164,9 +165,9 @@ var Tour = new Class({
           'opacity': 0
         }
       }).inject(this.options.tip.follow ? this.outline : this.body);
-      this.fx.tip = new Fx.Tween(this.current.tip, {
+      this.fx.tip = new Fx.Tween(this.current.tip, Object.merge({
         link: 'cancel'
-      });
+      }, this.options.tip));
     }
   },
   
@@ -201,7 +202,7 @@ var Tour = new Class({
         return;
       }
       
-      if (this.current.slide >= this.presentation.length - 1 && event.key === this.options.keyAccess.next){
+      if (this.current.slide >= (this.presentation.length - 1) && event.key === this.options.keyAccess.next){
         this.fireEvent('onLast', [this.outline, this.collected]);
         return;
       }

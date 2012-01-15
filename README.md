@@ -31,6 +31,7 @@ Create a website tour by moving a highlight box between specified elements
 	* `opacity` (defaults to `1.0`): Tips opacity
 	* `position`: Position. See Element.Position](http://mootools.net/docs/more/Element/Element.Position#Element:position) for reference
 	* `follow` (defaults to `false`): Should the tip follow the highlighter
+	* `duration` (defaults to `300`): Duration of the tip animation
 * `fx` (defaults to `5`)
 	* `duration` (defaults to `500`): Duration of the highlighting animation
 	* `transition` (defaults to `sine:out`): Transition type for the highlighting animation
