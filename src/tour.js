@@ -116,7 +116,21 @@ var Tour = new Class({
   
   create: function(){
     this.current.demo = true;
-    
+    this.createSlices();
+    this.createOutline();
+    this.createTip();
+    this.addFx();
+    window.addEvents({
+      keydown: this.bound.navigate
+    });
+  },
+  
+  show: function(){
+    this.create();
+    this.expose();
+  },
+  
+  createSlices: function(){
     if (this.options.overlay){
       var sliceProp = {
         'class': this.options.classPrefix + '_slice',
@@ -129,16 +143,19 @@ var Tour = new Class({
           }.bind(this)
         }
       };
-      
       for (var i = 0; i < this.slicesDir.length; i++){
         this.slices[this.slicesDir[i]] = Element('span', sliceProp).inject(this.body);
       }
     }
-    
+  },
+  
+  createOutline: function(){
     this.outline = Element('span', {
       'class': this.options.classPrefix + '_outline'
     }).inject(this.body);
-    
+  },
+  
+  createTip: function(){
     if (this.options.tip){
       this.current.tip = Element('span', {
         'class': this.options.classPrefix + '_tip',
@@ -147,8 +164,13 @@ var Tour = new Class({
           'opacity': 0
         }
       }).inject(this.options.tip.follows ? this.outline : this.body);
+      this.fx.tip = new Fx.Tween(this.current.tip, {
+        link: 'cancel'
+      });
     }
-    
+  },
+  
+  addFx: function(){
     this.collected = [this.slices.north, this.slices.east, this.slices.west, this.slices.south, this.outline];
     this.fx.slices = new Fx.Elements(this.collected, {
       onComplete: function(){
@@ -159,21 +181,10 @@ var Tour = new Class({
         // $log(!(this.outline.getPosition().y >= window.getSize().y-this.outline.getSize().y));
         // scroll to the highlight (either the tip or the outline)
         // new Fx.Scroll(this.body).toElement($pick(this.current.tip, this.outline));
-      
       }.bind(this),
       duration: this.options.fx.duration,
       transition: this.options.fx.transition
     });
-    
-    
-    window.addEvents({
-      keydown: this.bound.navigate
-    });
-  },
-  
-  show: function(){
-    this.create();
-    this.expose();
   },
   
   navigate: function(event){
@@ -210,14 +221,14 @@ var Tour = new Class({
     this.current.description = this.presentation[this.current.slide].description;
     this.highlighter(this.current.element);
     if (this.current.tip){
-      this.current.tip.fade(0);
+      this.fx.tip.start('opacity', 0);
     }
   },
   
   tip: function(){
     if (this.current.tip){
-      this.current.tip.set('html', this.current.description).fade(this.options.tip.opacity);
-      
+      this.current.tip.set('html', this.current.description);
+      this.fx.tip.start('opacity', this.options.tip.opacity);
       this.current.tip.position(Object.merge({
         relativeTo: this.outline,
         position: {
