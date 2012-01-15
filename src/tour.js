@@ -78,6 +78,8 @@ var Tour = new Class({
     
     this.nav = {};
     
+    this.fx = {};
+    
     window.addEvents({
       keydown: function(event){
         if (this.options.keyAccess.activate.call(event)){
@@ -147,6 +149,23 @@ var Tour = new Class({
       }).inject(this.options.tip.follows ? this.outline : this.body);
     }
     
+    this.collected = [this.slices.north, this.slices.east, this.slices.west, this.slices.south, this.outline];
+    this.fx.slices = new Fx.Elements(this.collected, {
+      onComplete: function(){
+        this.tip();
+        this.fireEvent('onReposition', [this.outline, this.collected]);
+        
+        // @todo: find a way to scroll only when the highlighter is out of the view port
+        // $log(!(this.outline.getPosition().y >= window.getSize().y-this.outline.getSize().y));
+        // scroll to the highlight (either the tip or the outline)
+        // new Fx.Scroll(this.body).toElement($pick(this.current.tip, this.outline));
+      
+      }.bind(this),
+      duration: this.options.fx.duration,
+      transition: this.options.fx.transition
+    });
+    
+    
     window.addEvents({
       keydown: this.bound.navigate
     });
@@ -168,7 +187,6 @@ var Tour = new Class({
         this.fireEvent('onLast', [this.outline, this.collected]);
         return;
       }
-      
       this.expose(event.key);
     }
   },
@@ -199,6 +217,7 @@ var Tour = new Class({
   tip: function(){
     if (this.current.tip){
       this.current.tip.set('html', this.current.description).fade(this.options.tip.opacity);
+      
       this.current.tip.position(Object.merge({
         relativeTo: this.outline,
         position: {
@@ -220,25 +239,9 @@ var Tour = new Class({
   
   highlighter: function(el){
     var elCoords = el.getCoordinatesWithOffset(this.options.offset);
-    this.collected = [this.slices.north, this.slices.east, this.slices.west, this.slices.south, this.outline];
-    this.fxSlices = new Fx.Elements(this.collected, {
-      onComplete: function(){
-        this.tip();
-        this.fireEvent('onReposition', [this.outline, this.collected]);
-        
-        // @todo: find a way to scroll only when the highlighter is out of the view port
-        // $log(!(this.outline.getPosition().y >= window.getSize().y-this.outline.getSize().y));
-        // scroll to the highlight (either the tip or the outline)
-        // new Fx.Scroll(this.body).toElement($pick(this.current.tip, this.outline));
-      
-      }.bind(this),
-      duration: this.options.fx.duration,
-      transition: this.options.fx.transition
-    });
     
     if (this.options.overlay){
-      // animate
-      this.fxSlices.start({
+      this.fx.slices.start({
         '0': {
           'height': elCoords.top,
           'width': window.getSize().x
