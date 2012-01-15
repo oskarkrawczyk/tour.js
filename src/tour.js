@@ -73,12 +73,10 @@ var Tour = new Class({
     this.presentation = presentation || [{}];
     this.body = document.getElement(document.body);
     
-    // slide details
     this.current = {
       slide: 0
     };
-
-    // create binds
+    
     this.bound = {
       navigate: this.navigate.bind(this),
       reposition: this.reposition.bind(this),
@@ -93,7 +91,6 @@ var Tour = new Class({
       }.bind(this)
     };
     
-    // store nav reference
     this.nav = {};
     
     window.addEvents({
@@ -133,7 +130,6 @@ var Tour = new Class({
   create: function(){
     this.current.demo = true;
     
-    // create the overlay if needed
     if (this.options.overlay){
       var sliceProp = {
         'class': this.options.classPrefix + '_slice',
@@ -147,18 +143,15 @@ var Tour = new Class({
         }
       };
       
-      // create the slices
       for (var i = 0; i < this.slicesDir.length; i++){
         this.slices[this.slicesDir[i]] = Element('span', sliceProp).inject(this.body);
       }
     }
     
-    // create the highlighter
     this.outline = Element('span', {
       'class': this.options.classPrefix + '_outline'
     }).inject(this.body);
     
-    // create the tip if needed
     if (this.options.tip){
       this.current.tip = Element('span', {
         'class': this.options.classPrefix + '_tip',
@@ -166,11 +159,12 @@ var Tour = new Class({
         'styles': {
           'opacity': 0
         }
-      }).inject(this.options.tip.follows ? this.outline : this.body); // either follow the highlight or stay in one position
+      }).inject(this.options.tip.follows ? this.outline : this.body);
     }
     
-    // navigate by pressing arrow right and arrow left
-    window.addEvent('keydown', this.bound.navigate);
+    window.addEvents({
+      keydown: this.bound.navigate
+    });
   },
   
   show: function(){
@@ -195,24 +189,13 @@ var Tour = new Class({
   },
   
   hide: function(){
-
-    // destroy the overlay
     for (var i = 0; i < this.slicesDir.length; i++){
       this.slices[this.slicesDir[i]].fadestroy();
     }
-    
-    // destroy the outline
     this.outline.fadestroy();
-    
-    // destroy the tip
     this.current.tip.fadestroy();
-    
-    // go back to the fist slide
     this.current.slide = 0;
-    
     this.current.demo = false;
-    
-    // remove events
     window.removeEvent('keydown', this.bound.navigate);
   },
   
@@ -220,17 +203,9 @@ var Tour = new Class({
     if (key){
       this.current.slide = (key == this.options.keyAccess.previous ? this.current.slide - 1 : this.current.slide + 1);
     }
-    
-    // get the presented element
     this.current.element = this.body.getElement(this.presentation[this.current.slide].element);
-    
-    // get the presented description
     this.current.description = this.presentation[this.current.slide].description;
-
-    // highlight current element
     this.highlighter(this.current.element);
-
-    // destroy the previous tip
     if (this.current.tip){
       this.current.tip.fade(0);
     }
@@ -238,10 +213,7 @@ var Tour = new Class({
   
   tip: function(){
     if (this.current.tip){
-      // update and show the tip
       this.current.tip.set('html', this.current.description).fade(this.options.tip.opacity);
-
-      // reposition the tip
       this.current.tip.position(Object.merge({
         relativeTo: this.outline,
         position: {
@@ -262,14 +234,8 @@ var Tour = new Class({
   },
   
   highlighter: function(el){
-    
-    // get the coords with additional offset
     var elCoords = el.getCoordinatesWithOffset(this.options.offset);
-    
-    // collect all slices and the outline
     this.collected = [this.slices.north, this.slices.east, this.slices.west, this.slices.south, this.outline];
-    
-    // instance the animation
     this.fxSlices = new Fx.Elements(this.collected, {
       onComplete: function(){
         this.tip();
