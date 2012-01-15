@@ -237,8 +237,8 @@ var Tour = new Class({
     }
   },
   
-  highlighter: function(el){
-    var elCoords = el.getCoordinatesWithOffset(this.options.offset);
+  highlighter: function(element){
+    var elCoords = element.getCoordinatesWithOffset(this.options.offset);
     
     if (this.options.overlay){
       this.fx.slices.start({
