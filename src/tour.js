@@ -188,7 +188,7 @@ var Tour = new Class({
         // @todo: find a way to scroll only when the highlighter is out of the view port
         // $log(!(this.outline.getPosition().y >= window.getSize().y-this.outline.getSize().y));
         // scroll to the highlight (either the tip or the outline)
-        // new Fx.Scroll(this.body).toElement($pick(this.current.tip, this.outline));
+        new Fx.Scroll(this.body).toElement(this.current.tip || this.outline);
       }.bind(this),
       duration: this.options.fx.duration,
       transition: this.options.fx.transition
