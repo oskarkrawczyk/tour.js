@@ -1,6 +1,7 @@
 body {
 	padding: 50px;
 	font-family: Helvetica;
+	background: url(bg.png) 50% 0 no-repeat;
 }
 
 .tourjs_tip {
@@ -24,7 +25,7 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: #000;
+	background: #3F3F3F;
 }
 
 .tourjs_outline {
@@ -34,8 +35,8 @@ body {
 	left: 10px;
 
 	/* whatever style you want */
-	border: solid 5px #FFE132;
+	border: solid 5px #FFCF27;
 	margin: -5px 0 0 -5px;
-	box-shadow: 0px 2px 4px #909090;
+	box-shadow: 0 0 20px #3F3F3F;
 	border-radius: 3px;
 }

@@ -25,7 +25,7 @@ var Tour = new Class({
     classPrefix: 'tourjs',
     offset: 5,
     overlay: {
-      opacity: 0.3
+      opacity: 0.5
     },
     tip: {
       opacity: 1,
@@ -57,7 +57,7 @@ var Tour = new Class({
     this.slicesDir = ['north', 'east', 'west', 'south'];
     this.slices = {};
     this.presentation = presentation || [{}];
-    this.body = document.getElement(document.body);
+    this.body = Element.getElement(document, document.body);
     
     this.current = {
       slide: 0
@@ -225,7 +225,7 @@ var Tour = new Class({
     if (key){
       this.current.slide = (key == this.options.keyAccess.previous ? this.current.slide - 1 : this.current.slide + 1);
     }
-    this.current.element = this.body.getElement(this.presentation[this.current.slide].element);
+    this.current.element = Element.getElement(this.body, this.presentation[this.current.slide].element);
     this.current.description = this.presentation[this.current.slide].description;
     this.highlighter(this.current.element);
     if (this.current.tip){
@@ -293,7 +293,7 @@ Tour.Build = new Class({
   Slides: [],
   
   initialize: function(dataParam, options){
-    document.getElements('*[' + dataParam + ']').each(function(element){
+    Array.each(Element.getElements(document, '*[' + dataParam + ']'), function(element){
       var uid = 'tuid-' + Number.random(1000, 9999);
       element.set('data-tour-uid', uid);
       var option = {
@@ -303,6 +303,14 @@ Tour.Build = new Class({
       this.Slides.push(option);
     }, this);
     new Tour(this.Slides, options);
+  }
+  
+});
+
+Element.implement({
+  
+  tour: function(options){
+    new Tour.Build(this, options);
   }
   
 });
