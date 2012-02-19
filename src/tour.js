@@ -1,10 +1,11 @@
 Element.implement({
   getCoordinatesWithOffset: function(offset){
+    var coords = this.getCoordinates();
     return {
-      'top': this.getCoordinates().top - offset,
-      'left': this.getCoordinates().left - offset,
-      'width': this.getCoordinates().width + (offset * 2),
-      'height': this.getCoordinates().height + (offset * 2)
+      'top': coords.top - offset,
+      'left': coords.left - offset,
+      'width': coords.width + (offset * 2),
+      'height': coords.height + (offset * 2)
     };
   },
   
