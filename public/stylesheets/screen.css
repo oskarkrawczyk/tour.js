@@ -8,6 +8,7 @@ body {
 
 a {
 	text-decoration: none;
+	color: #C31A41;
 }
 
 a:hover {
@@ -104,4 +105,38 @@ pre {
 	font-family: Monaco, sans-serif;
 	font-size: .9em;
 	line-height: 1.5em;
+}
+
+table {
+	text-align: left;
+}
+
+	table td {
+		padding: 7px 0 7px 5px;
+		line-height: 1.4em;
+		vertical-align: top;
+		border-top: solid 1px #DFDFDF;
+	}
+	
+	table th {
+		padding: 0 0 7px 5px;
+	}
+	
+	table tr:nth-child(even) td {
+		background: #F9F9F9;
+	}
+
+.name {
+	width: 135px;
+}
+
+.type {
+	width: 90px;
+}
+
+.default {
+	width: 75px;
+}
+
+.desc {
 }
