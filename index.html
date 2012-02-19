@@ -4,6 +4,18 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="public/stylesheets/reset.css" type="text/css" media="screen, projection, print" />
     <link rel="stylesheet" href="public/stylesheets/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="https://raw.github.com/oskarkrawczyk/tour.js/master/demo/tour.css" type="text/css" media="screen, projection" />
+    <script type="text/javascript" src="https://raw.github.com/oskarkrawczyk/tour.js/master/demo/mootools.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/oskarkrawczyk/tour.js/master/src/tour.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      //<![CDATA[
+        document.addEvents({
+          domready: function(event){
+            document.getElements('*[data-tour-desc]').tour();
+          }
+        });
+      //]]>
+    </script>
     <title>Tour.js</title>
   </head>
   <body>
@@ -12,7 +24,7 @@
         <h1><a title="" href="#">Tour.js</a></h1>
         <h2>Create a tour by moving a highlight box<br />between website elements</h2>
       </div> <!-- /header -->
-      <ul id="actions">
+      <ul id="actions" data-tour-desc="Demo or download">
         <li class="example"><span class="a">Hit <kbd>?</kbd> for demo</span></li>
         <li class="or"><span>or</span></li>
         <li class="download"><a title="" href="http://github.com/oskarkrawczyk/tour.js/zipball/master">Download <strong>v1.0</strong></a></li>
