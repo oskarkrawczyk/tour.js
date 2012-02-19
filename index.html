@@ -19,16 +19,19 @@
       </ul> <!-- /actions -->
       
       <h3>Setup</h3>
-      <h4>HTML</h4>
-      <pre>&lt;p data-tour-desc="Element description">&lt;/p></pre>
-      <h4>JavaScript</h4>
-      <pre>new Tour.Build('data-tour-desc');</pre>
+      <h4>Simple</h4>
+      <pre>&lt;p class="tour" data-tour-desc="Element description">&lt;/p></pre>
+      <pre>document.getElements('.tour').tour();</pre>
+      
+      <h4>With options</h4>
+      <pre>&lt;p class="tour" data-title="Element description">&lt;/p></pre>
 <pre>
-new Tour.Build('data-tour-desc', {
+document.getElements('.tour').tour({
+  description: 'data-title',
   overlay: {
     opacity: 0.5
   },
-  keyAccess: {
+  accesskey: {
     previous: 'up',
     next: 'down'
   }
@@ -45,6 +48,12 @@ new Tour.Build('data-tour-desc', {
         </tr>
         <tr>
           <td>classPrefix</td>
+          <td>string</td>
+          <td>data-tour-desc</td>
+          <td class="desc">Property from which to fetch the description</td>
+        </tr>
+        <tr>
+          <td>description</td>
           <td>string</td>
           <td>tourjs</td>
           <td class="desc">Prefix for the CSS class</td>
