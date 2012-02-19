@@ -97,25 +97,25 @@ new Tour.Build('data-tour-desc', {
 		<td>Function triggering the activation - see source for details</td>
 	</tr>
 	<tr>
-		<td>keyAccess.start</td>
+		<td>accesskey.start</td>
 		<td>string</td>
 		<td>start</td>
 		<td>Event to start the tour</td>
 	</tr>
 	<tr>
-		<td>keyAccess.next</td>
+		<td>accesskey.next</td>
 		<td>string</td>
 		<td>right</td>
 		<td>Next slide</td>
 	</tr>
 	<tr>
-		<td>keyAccess.previous</td>
+		<td>accesskey.previous</td>
 		<td>string</td>
 		<td>left</td>
 		<td>Previous slide</td>
 	</tr>
 	<tr>
-		<td>keyAccess.end</td>
+		<td>accesskey.end</td>
 		<td>string</td>
 		<td>esc</td>
 		<td>Close tour</td>

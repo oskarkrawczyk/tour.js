@@ -38,7 +38,7 @@ var Tour = new Class({
       duration: 500,
       transition: 'sine:out'
     },
-    keyAccess: {
+    accesskey: {
       activate: function(){
         return this.shift && this.key === '/';
       },
@@ -84,13 +84,13 @@ var Tour = new Class({
     
     window.addEvents({
       keydown: function(event){
-        if (this.options.keyAccess.activate.call(event)){
+        if (this.options.accesskey.activate.call(event)){
           this.start();
         }
-        if (event.key === this.options.keyAccess.start && !this.current.demo){
+        if (event.key === this.options.accesskey.start && !this.current.demo){
           this.show();
         }
-        if (event.key === this.options.keyAccess.end && this.current.demo){
+        if (event.key === this.options.accesskey.end && this.current.demo){
           this.hide();
         }
       }.bind(this),
@@ -107,7 +107,7 @@ var Tour = new Class({
       this.presentation = presentation;
     }
     window.fireEvent('keydown', {
-      key: this.options.keyAccess.start
+      key: this.options.accesskey.start
     });
   },
   
@@ -197,13 +197,13 @@ var Tour = new Class({
   },
   
   navigate: function(event){
-    if (event.key === this.options.keyAccess.previous || event.key === this.options.keyAccess.next){
-      if (this.current.slide <= 0 && event.key === this.options.keyAccess.previous){
+    if (event.key === this.options.accesskey.previous || event.key === this.options.accesskey.next){
+      if (this.current.slide <= 0 && event.key === this.options.accesskey.previous){
         this.fireEvent('onFirst', [this.outline, this.collected]);
         return;
       }
       
-      if (this.current.slide >= (this.presentation.length - 1) && event.key === this.options.keyAccess.next){
+      if (this.current.slide >= (this.presentation.length - 1) && event.key === this.options.accesskey.next){
         this.fireEvent('onLast', [this.outline, this.collected]);
         return;
       }
@@ -224,7 +224,7 @@ var Tour = new Class({
   
   expose: function(key){
     if (key){
-      this.current.slide = (key == this.options.keyAccess.previous ? this.current.slide - 1 : this.current.slide + 1);
+      this.current.slide = (key == this.options.accesskey.previous ? this.current.slide - 1 : this.current.slide + 1);
     }
     this.current.element = Element.getElement(this.body, this.presentation[this.current.slide].element);
     this.current.description = this.presentation[this.current.slide].description;
