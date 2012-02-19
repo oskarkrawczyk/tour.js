@@ -314,3 +314,5 @@ Element.implement({
   }
   
 });
+
+// Element.tour()
