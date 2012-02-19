@@ -1,30 +1,32 @@
 # Tour.js
-Create a website tour by moving a highlight box between specified elements
+Create a tour by moving a highlighted box between elements on the website
 
 ## Setting up
 
-### HTML
+### Simple
 ```html
 <p data-tour-desc="Element description"></p>
 ```
 
-### JavaScript
-
-#### Simple
 ```javascript
-new Tour.Build('data-tour-desc');
+document.getElements('.tour').tour();
 ```
 
 #### Additional options
+```html
+<p class="tour" data-title="Element description"></p>
+```
+
 ```javascript
-new Tour.Build('data-tour-desc', {
-	overlay: {
-		opacity: 0.5
-	},
-	keyAccess: {
-		previous: 'up',
-		next: 'down'
-	}
+document.getElements('.tour').tour({
+  description: 'data-title',
+  overlay: {
+    opacity: 0.5
+  },
+  accesskey: {
+    previous: 'up',
+    next: 'down'
+  }
 });
 ```
 ## Options
