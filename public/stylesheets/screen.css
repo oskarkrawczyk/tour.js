@@ -1,7 +1,107 @@
 body {
-	
+	font-size: 13px;
+	font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif;
+	border: solid 10px #fff;
+	background: #F1F1F1;
+	color: #666;
 }
 
-#ie-message {
-	display: none;
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#body-wrapper {
+	width: 480px;
+	margin: 30px auto;
+}
+
+#header {
+	background: url(/public/images/dot-h.png) 0 100% repeat-x;
+}
+
+#header h1 {
+	background: url(/public/images/dot-h.png) 0 100% repeat-x;
+	padding: 0 0 30px;
+}
+
+	#header h1 a {
+		background: url(/public/images/logo.png) 0 100% repeat-x;
+		height: 40px;
+		width: 225px;
+		display: block;
+		margin: 0 auto;
+		text-indent: -900em;
+	}
+
+#header h2 {
+	padding: 20px 0;
+	text-align: center;
+	font-size: 1.4em;
+	line-height: 1.4em;
+	font-family: Georgia, 'Times New Roman', serif;
+	color: #333;
+}
+
+#actions {
+	background: url(/public/images/dot-h.png) 0 100% repeat-x;
+	padding: 20px 0;
+	text-align: center;
+}
+
+	#actions li {
+		display: inline;
+	}
+	
+	#actions li a {
+		display: inline-block;
+		height: 46px;
+		line-height: 46px;
+		background: #C31A41;
+		padding: 0 20px;
+		color: #fff;
+		font-size: 1.15em;
+	}
+	
+	#actions li span {
+		display: inline-block;
+		height: 46px;
+		line-height: 46px;
+		padding: 0 10px;
+	}
+	
+	#actions .download a {
+		background: #393939;
+	}
+	
+	#actions .download a strong {
+		color: #999;
+		font-size: .75em;
+		font-weight: normal;
+		padding-left: 5px;
+	}
+	
+h3 {
+	margin: 30px 0 15px;
+	font-weight: bold;
+	font-size: 1.3em;
+	color: #333;
+}
+
+p {
+	margin: 0 0 5px;
+	padding: 0;
+}
+
+pre {
+	background: #393939;
+	padding: 10px;
+	margin: 10px 0 20px;
+	color: #fff;
+	font-family: Monaco, sans-serif;
+	font-size: .9em;
+	line-height: 1.5em;
 }

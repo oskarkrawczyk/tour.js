@@ -7,10 +7,34 @@
     <title>Tour.js</title>
   </head>
   <body>
-    
     <div id="body-wrapper">
-      <a href="http://github.com/oskarkrawczyk/tourjs/zipball/master">zip</a> or
-      <a href="http://github.com/oskarkrawczyk/tourjs/tarball/master">tar</a> formats.
+      <div id="header">
+        <h1><a title="" href="#">Tour.js</a></h1>
+        <h2>Create a tour by moving a highlight box<br />between website elements</h2>
+      </div> <!-- /header -->
+      <ul id="actions">
+        <li class="example"><a title="" href="#">Launch example</a></li>
+        <li class="or"><span>or</span></li>
+        <li class="download"><a title="" href="http://github.com/oskarkrawczyk/tour.js/zipball/master">Download <strong>v1.0</strong></a></li>
+      </ul> <!-- /actions -->
+      <h3>Setup</h3>
+      <h4>HTML</h4>
+      <pre>&lt;p data-tour-desc="Element description">&lt;/p></pre>
+      <h4>JavaScript</h4>
+      <pre>new Tour.Build('data-tour-desc');</pre>
+<pre>
+new Tour.Build('data-tour-desc', {
+  overlay: {
+    opacity: 0.5
+  },
+  keyAccess: {
+    previous: 'up',
+    next: 'down'
+  }
+});
+</pre>
+      <h3>Options</h3>
+      <h3>Events</h3>
     </div> <!-- /body-wrapper -->
   </body>
 </html>
