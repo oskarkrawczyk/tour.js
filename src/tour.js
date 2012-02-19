@@ -258,12 +258,12 @@ var Tour = new Class({
   
   highlighter: function(element){
     var elCoords = element.getCoordinatesWithOffset(this.options.offset);
-    
+    var windowWidth = window.getSize().x;
     if (this.options.overlay){
       this.fx.slices.start({
         '0': {
           'height': elCoords.top,
-          'width': window.getSize().x
+          'width': windowWidth
         },
         '1': {
           'height': elCoords.height,
@@ -272,13 +272,13 @@ var Tour = new Class({
         },
         '2': {
           'height': elCoords.height,
-          'width': window.getSize().x - (elCoords.left + elCoords.width),
+          'width': windowWidth - (elCoords.left + elCoords.width),
           'left': elCoords.left + elCoords.width,
           'top': elCoords.top
         },
         '3': {
           'height': window.getScrollSize().y - (elCoords.top + elCoords.height),
-          'width': window.getSize().x,
+          'width': windowWidth,
           'top': elCoords.top + elCoords.height
         }
       });
@@ -287,32 +287,21 @@ var Tour = new Class({
   }
 });
 
-// Builder
-Tour.Build = new Class({
+Elements.implement({
   
-  Slides: [],
-  
-  initialize: function(dataParam, options){
-    Array.each(Element.getElements(document, '*[' + dataParam + ']'), function(element){
+  tour: function(options){
+    options = options || {};
+    var slides = [];
+    Array.each(this, function(element){
       var uid = 'tuid-' + Number.random(1000, 9999);
       element.set('data-tour-uid', uid);
       var option = {
         element: '*[data-tour-uid=' + uid + ']',
-        description: element.get(dataParam)
+        description: element.get(options.description || 'data-tour-desc')
       };
-      this.Slides.push(option);
+      slides.push(option);
     }, this);
-    new Tour(this.Slides, options);
+    new Tour(slides, options);
   }
   
 });
-
-Element.implement({
-  
-  tour: function(options){
-    new Tour.Build(this, options);
-  }
-  
-});
-
-// Element.tour()

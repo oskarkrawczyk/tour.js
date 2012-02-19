@@ -4,15 +4,17 @@
   <head>
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type="text/javascript" charset="utf-8" src="mootools.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../src/tour.js"></script>
-    <link rel="stylesheet" href="tour.css" type="text/css" media="screen" />
+    <script type="text/javascript" charset="utf-8" src="/demo/mootools.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/src/tour.js"></script>
+    <link rel="stylesheet" href="/demo/tour.css" type="text/css" media="screen" />
     
     <script type="text/javascript" charset="utf-8">
       //<![CDATA[
         document.addEvents({
           domready: function(event){
-            new Tour.Build('data-tour-desc');
+            document.getElements('*[data-tour-desc]').tour({
+              description: 'data-tour-desc'
+            });
           }
         });
       //]]>
