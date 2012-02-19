@@ -20,16 +20,16 @@ a:hover {
 }
 
 #header {
-	background: url(/public/images/dot-h.png) 0 100% repeat-x;
+	background: url(/tour.js/public/images/dot-h.png) 0 100% repeat-x;
 }
 
 #header h1 {
-	background: url(/public/images/dot-h.png) 0 100% repeat-x;
+	background: url(/tour.js/public/images/dot-h.png) 0 100% repeat-x;
 	padding: 0 0 30px;
 }
 
 	#header h1 a {
-		background: url(/public/images/logo.png) 0 100% repeat-x;
+		background: url(/tour.js/public/images/logo.png) 0 100% repeat-x;
 		height: 40px;
 		width: 225px;
 		display: block;
@@ -47,7 +47,7 @@ a:hover {
 }
 
 #actions {
-	background: url(/public/images/dot-h.png) 0 100% repeat-x;
+	background: url(/tour.js/public/images/dot-h.png) 0 100% repeat-x;
 	padding: 20px 0;
 	text-align: center;
 }
