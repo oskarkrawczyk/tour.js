@@ -280,7 +280,8 @@ var Tour = new Class({
         '3': {
           'height': window.getScrollSize().y - (elCoords.top + elCoords.height),
           'width': windowWidth,
-          'top': elCoords.top + elCoords.height
+          'top': elCoords.top,
+          'margin-top': elCoords.height
         }
       });
     }
