@@ -1,3 +1,5 @@
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 # Tour.js
 Create a tour by moving a highlighted box between elements on the website
 
